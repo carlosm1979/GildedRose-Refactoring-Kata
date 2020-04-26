@@ -59,4 +59,12 @@ describe("Gilded Rose", function() {
     expect(items[0].sellIn).toBe(-1)
     expect(items[0].quality).toBe(3)
   });
+
+  it('The Quality of an item is never more than 50', () => {
+    const gildedRose = new Shop([new Item("Aged Brie", 0, 50)]);
+
+    const items = gildedRose.updateQuality();
+
+    expect(items[0].quality).toBe(50)
+  });
 });
