@@ -47,7 +47,7 @@ class Shop {
               }
             }
           } else {
-            this.items[i].quality = this.items[i].quality - this.items[i].quality;
+            this.dropQuality(i);
           }
         } else {
           if (this.items[i].quality < 50) {
@@ -58,6 +58,10 @@ class Shop {
     }
 
     return this.items;
+  }
+
+  dropQuality(i) {
+    this.items[i].quality = this.items[i].quality - this.items[i].quality;
   }
 
   isSulfurasProduct(i) {
