@@ -28,7 +28,11 @@ class Shop {
 
   conjuredProductBehavior(i) {
     this.standardSellinDecrease(i);
-    this.qualityDecrease(i, 2);
+    if (!this.isSellByDate(i)) {
+      this.qualityDecrease(i, 2);
+    } else {
+      this.qualityDecrease(i, 4);
+    }
   }
 
   isConjuredProduct(i) {
