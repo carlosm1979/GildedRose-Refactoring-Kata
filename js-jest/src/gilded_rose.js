@@ -16,21 +16,12 @@ class Shop {
         this.decreaseSellin(i);
       }
       if (this.productHasStandardBehavior(i) && this.hasQuality(i)) {
-        this.decreaseQuality(i);
+        this.standardQualityDecrease(i);
       } else {
         if (this.isQualityUnderLimit(i)) {
-          this.increaseQuality(i)
+          this.standardQualityIncrease(i)
           if (this.isBackstageProduct(i)) {
-            if (this.items[i].sellIn < 11) {
-              if (this.isQualityUnderLimit(i)) {
-                this.increaseQuality(i);
-              }
-            }
-            if (this.items[i].sellIn < 6) {
-              if (this.isQualityUnderLimit(i)) {
-                this.increaseQuality(i);
-              }
-            }
+            this.backstageQualityIncrease(i);
           }
         }
       }
@@ -39,7 +30,7 @@ class Shop {
           if (!this.isBackstageProduct(i)) {
             if (this.hasQuality(i)) {
               if (!this.isSulfurasProduct(i)) {
-                this.decreaseQuality(i);
+                this.standardQualityDecrease(i);
               }
             }
           } else {
@@ -47,13 +38,26 @@ class Shop {
           }
         } else {
           if (this.isQualityUnderLimit(i)) {
-            this.increaseQuality(i);
+            this.standardQualityIncrease(i);
           }
         }
       }
     }
 
     return this.items;
+  }
+
+  backstageQualityIncrease(i) {
+    if (this.items[i].sellIn < 11) {
+      if (this.isQualityUnderLimit(i)) {
+        this.standardQualityIncrease(i);
+      }
+    }
+    if (this.items[i].sellIn < 6) {
+      if (this.isQualityUnderLimit(i)) {
+        this.standardQualityIncrease(i);
+      }
+    }
   }
 
   productHasStandardBehavior(i) {
@@ -88,11 +92,11 @@ class Shop {
     return this.items[i].name == 'Aged Brie';
   }
 
-  increaseQuality(i) {
+  standardQualityIncrease(i) {
     this.items[i].quality = this.items[i].quality + 1;
   }
 
-  decreaseQuality(i) {
+  standardQualityDecrease(i) {
     this.items[i].quality = this.items[i].quality - 1;
   }
 }
