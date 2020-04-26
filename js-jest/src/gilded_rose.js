@@ -12,18 +12,15 @@ class Shop {
   }
   updateQuality() {
     for (let i = 0; i < this.items.length; i++) {
-      if (this.isConjuredProduct(i)) {
-        this.standardSellinDecrease(i)
-        this.qualityDecrease(i,2)
-        continue
-      }
-
       if (this.isStandardProduct(i)) {
         this.standardBehavior(i);
       } else if (this.isBackstageProduct(i)) {
         this.backstageProductBehavior(i);
       } else if (this.isAgedBrieProduct(i)) {
         this.agedProductBehavior(i);
+      } else if (this.isConjuredProduct(i)) {
+        this.standardSellinDecrease(i)
+        this.qualityDecrease(i,2)
       }
     }
 
@@ -78,7 +75,7 @@ class Shop {
   }
 
   isStandardProduct(i) {
-    return !this.isSulfurasProduct(i) && !this.isAgedBrieProduct(i) && !this.isBackstageProduct(i);
+    return !this.isConjuredProduct(i) && !this.isSulfurasProduct(i) && !this.isAgedBrieProduct(i) && !this.isBackstageProduct(i);
   }
 
   isQualityUnderLimit(i) {
