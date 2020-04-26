@@ -44,28 +44,25 @@ class Shop {
 
   backstageProductBehavior(i) {
     this.standardSellinDecrease(i);
-    this.backstageQualityIncrease(i);
-    this.backstageQualityDecrease(i);
-  }
-
-  backstageQualityDecrease(i) {
     if (this.isSellByDate(i)) {
       this.dropQuality(i);
+    } else {
+      if (this.sellinIsUnder(i, 6)) {
+        this.qualityIncrease(i,3);
+      } else if (this.sellinIsUnder(i, 11)) {
+        this.qualityIncrease(i,2);
+      } else {
+        this.qualityIncrease(i,1)
+      }
     }
+  }
+
+  sellinIsUnder(i, quantity) {
+    return this.items[i].sellIn < quantity;
   }
 
   isSellByDate(i) {
     return this.items[i].sellIn < 0;
-  }
-
-  backstageQualityIncrease(i) {
-    this.qualityIncrease(i,1)
-    if (this.items[i].sellIn < 11) {
-      this.qualityIncrease(i,1);
-    }
-    if (this.items[i].sellIn < 6) {
-      this.qualityIncrease(i,1);
-    }
   }
 
   isStandardProduct(i) {
