@@ -14,7 +14,7 @@ class Shop {
     for (let i = 0; i < this.items.length; i++) {
       if (!this.isAgedBrieProduct(i) && !this.isBackstageProduct(i)) {
         if (this.items[i].quality > 0) {
-          if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
+          if (!this.isSulfurasProduct(i)) {
             this.decreaseQuality(i);
           }
         }
@@ -35,14 +35,14 @@ class Shop {
           }
         }
       }
-      if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
+      if (!this.isSulfurasProduct(i)) {
         this.items[i].sellIn = this.items[i].sellIn - 1;
       }
       if (this.items[i].sellIn < 0) {
         if (!this.isAgedBrieProduct(i)) {
           if (!this.isBackstageProduct(i)) {
             if (this.items[i].quality > 0) {
-              if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
+              if (!this.isSulfurasProduct(i)) {
                 this.decreaseQuality(i);
               }
             }
@@ -58,6 +58,10 @@ class Shop {
     }
 
     return this.items;
+  }
+
+  isSulfurasProduct(i) {
+    return this.items[i].name == 'Sulfuras, Hand of Ragnaros';
   }
 
   isBackstageProduct(i) {
