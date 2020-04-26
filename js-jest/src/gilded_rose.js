@@ -23,7 +23,7 @@ class Shop {
         } else {
           this.standardQualityIncrease(i)
         }
-    }
+      }
       if (this.items[i].sellIn < 0) {
         if (!this.isAgedBrieProduct(i)) {
           if (!this.isBackstageProduct(i)) {
