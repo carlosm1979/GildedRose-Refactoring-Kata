@@ -12,6 +12,12 @@ class Shop {
   }
   updateQuality() {
     for (let i = 0; i < this.items.length; i++) {
+      if (this.items[i].name == 'Conjured') {
+        this.standardSellinDecrease(i)
+        this.qualityDecrease(i,2)
+        continue
+      }
+
       if (this.isStandardProduct(i)) {
         this.standardBehavior(i);
       } else if (this.isBackstageProduct(i)) {

@@ -16,6 +16,15 @@ describe("Gilded Rose", function() {
     expect(items[0].quality).toBe(8)
   });
 
+  it('“Conjured” items degrade in Quality twice as fast as normal items', () => {
+    const gildedRose = new Shop([new Item("Conjured", 10, 9)]);
+
+    const items = gildedRose.updateQuality();
+
+    expect(items[0].sellIn).toBe(9)
+    expect(items[0].quality).toBe(7)
+  });
+
   describe.each([
     {initialSellin: 0, initialQuality: 10, expectedSelling: -1, expectedQuality: 8},
     {initialSellin: -1, initialQuality: 10, expectedSelling: -2, expectedQuality: 8}
@@ -103,5 +112,7 @@ test('“Backstage passes”, like aged brie, decrease to 0 after sell by date',
   expect(items[0].sellIn).toBe(-1)
   expect(items[0].quality).toBe(0)
 });
+
+
 
 });
