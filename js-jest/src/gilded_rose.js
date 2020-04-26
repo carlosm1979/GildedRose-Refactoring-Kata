@@ -36,9 +36,9 @@ class Shop {
 
   agedProductBehavior(i) {
     this.standardSellinDecrease(i);
-    this.standardQualityIncrease(i);
+    this.qualityIncrease(i,1);
     if (this.isSellByDate(i)) {
-      this.standardQualityIncrease(i);
+      this.qualityIncrease(i,1);
     }
   }
 
@@ -59,12 +59,12 @@ class Shop {
   }
 
   backstageQualityIncrease(i) {
-    this.standardQualityIncrease(i)
+    this.qualityIncrease(i,1)
     if (this.items[i].sellIn < 11) {
-      this.standardQualityIncrease(i);
+      this.qualityIncrease(i,1);
     }
     if (this.items[i].sellIn < 6) {
-      this.standardQualityIncrease(i);
+      this.qualityIncrease(i,1);
     }
   }
 
@@ -100,9 +100,9 @@ class Shop {
     return this.items[i].name == 'Aged Brie';
   }
 
-  standardQualityIncrease(i) {
+  qualityIncrease(i, quantity) {
     if (this.isQualityUnderLimit(i)) {
-      this.items[i].quality = this.items[i].quality + 1;
+      this.items[i].quality = this.items[i].quality + quantity;
     }
   }
 
