@@ -36,7 +36,7 @@ class Shop {
         }
       }
       if (!this.isSulfurasProduct(i)) {
-        this.items[i].sellIn = this.items[i].sellIn - 1;
+        this.decreaseSellin(i);
       }
       if (this.items[i].sellIn < 0) {
         if (!this.isAgedBrieProduct(i)) {
@@ -58,6 +58,10 @@ class Shop {
     }
 
     return this.items;
+  }
+
+  decreaseSellin(i) {
+    this.items[i].sellIn = this.items[i].sellIn - 1;
   }
 
   dropQuality(i) {
