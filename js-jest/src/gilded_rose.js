@@ -25,17 +25,13 @@ class Shop {
         }
       }
       if (this.items[i].sellIn < 0) {
-        if (!this.isAgedBrieProduct(i)) {
-          if (!this.isBackstageProduct(i)) {
-            if (this.hasQuality(i)) {
-              if (!this.isSulfurasProduct(i)) {
-                this.standardQualityDecrease(i);
-              }
-            }
-          } else {
-            this.dropQuality(i);
-          }
-        } else {
+        if (this.productHasStandardBehavior(i) && this.hasQuality(i)) {
+          this.standardQualityDecrease(i);
+        }
+        if (this.isBackstageProduct(i)) {
+          this.dropQuality(i);
+        }
+        if (this.isAgedBrieProduct(i)){
           this.standardQualityIncrease(i);
         }
       }
