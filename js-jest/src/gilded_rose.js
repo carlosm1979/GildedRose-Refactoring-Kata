@@ -19,16 +19,16 @@ class Shop {
           }
         }
       } else {
-        if (this.items[i].quality < 50) {
+        if (this.isQualityUnderLimit(i)) {
           this.increaseQuality(i)
           if (this.isBackstageProduct(i)) {
             if (this.items[i].sellIn < 11) {
-              if (this.items[i].quality < 50) {
+              if (this.isQualityUnderLimit(i)) {
                 this.increaseQuality(i);
               }
             }
             if (this.items[i].sellIn < 6) {
-              if (this.items[i].quality < 50) {
+              if (this.isQualityUnderLimit(i)) {
                 this.increaseQuality(i);
               }
             }
@@ -50,7 +50,7 @@ class Shop {
             this.dropQuality(i);
           }
         } else {
-          if (this.items[i].quality < 50) {
+          if (this.isQualityUnderLimit(i)) {
             this.increaseQuality(i);
           }
         }
@@ -58,6 +58,10 @@ class Shop {
     }
 
     return this.items;
+  }
+
+  isQualityUnderLimit(i) {
+    return this.items[i].quality < 50;
   }
 
   hasQuality(i) {
