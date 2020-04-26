@@ -21,9 +21,7 @@ class Shop {
         if (this.isBackstageProduct(i)) {
           this.backstageQualityIncrease(i);
         } else {
-          if (this.isQualityUnderLimit(i)) {
-            this.standardQualityIncrease(i)
-          }
+          this.standardQualityIncrease(i)
         }
     }
       if (this.items[i].sellIn < 0) {
@@ -38,9 +36,7 @@ class Shop {
             this.dropQuality(i);
           }
         } else {
-          if (this.isQualityUnderLimit(i)) {
-            this.standardQualityIncrease(i);
-          }
+          this.standardQualityIncrease(i);
         }
       }
     }
@@ -49,18 +45,12 @@ class Shop {
   }
 
   backstageQualityIncrease(i) {
-    if (this.isQualityUnderLimit(i)) {
-      this.standardQualityIncrease(i)
-      if (this.items[i].sellIn < 11) {
-        if (this.isQualityUnderLimit(i)) {
-          this.standardQualityIncrease(i);
-        }
-      }
-      if (this.items[i].sellIn < 6) {
-        if (this.isQualityUnderLimit(i)) {
-          this.standardQualityIncrease(i);
-        }
-      }
+    this.standardQualityIncrease(i)
+    if (this.items[i].sellIn < 11) {
+      this.standardQualityIncrease(i);
+    }
+    if (this.items[i].sellIn < 6) {
+      this.standardQualityIncrease(i);
     }
   }
 
@@ -97,7 +87,9 @@ class Shop {
   }
 
   standardQualityIncrease(i) {
-    this.items[i].quality = this.items[i].quality + 1;
+    if (this.isQualityUnderLimit(i)) {
+      this.items[i].quality = this.items[i].quality + 1;
+    }
   }
 
   standardQualityDecrease(i) {
