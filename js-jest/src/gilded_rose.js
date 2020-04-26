@@ -12,7 +12,7 @@ class Shop {
   }
   updateQuality() {
     for (let i = 0; i < this.items.length; i++) {
-      if (this.items[i].name == 'Conjured') {
+      if (this.isConjuredProduct(i)) {
         this.standardSellinDecrease(i)
         this.qualityDecrease(i,2)
         continue
@@ -28,6 +28,10 @@ class Shop {
     }
 
     return this.items;
+  }
+
+  isConjuredProduct(i) {
+    return this.items[i].name == 'Conjured';
   }
 
   standardBehavior(i) {
