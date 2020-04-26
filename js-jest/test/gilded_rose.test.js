@@ -7,21 +7,12 @@ describe("Gilded Rose", function() {
     expect(items[0].name).toBe("foo");
   });
 
-  it('Sellin degress one point after one day', () => {
-    const gildedRose = new Shop([new Item("foo", 10, 0)]);
+  it('At the end of each day our system lowers both values for every item', () => {
+    const gildedRose = new Shop([new Item("foo", 10, 9)]);
 
     const items = gildedRose.updateQuality();
 
     expect(items[0].sellIn).toBe(9)
-  });
-
-  it('Quality degress one point after one day', () => {
-    const gildedRose = new Shop([new Item("foo", 1, 9)]);
-
-    const items = gildedRose.updateQuality();
-
     expect(items[0].quality).toBe(8)
   });
-
-
 });
