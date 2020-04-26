@@ -12,6 +12,9 @@ class Shop {
   }
   updateQuality() {
     for (let i = 0; i < this.items.length; i++) {
+      if (!this.isSulfurasProduct(i)) {
+        this.decreaseSellin(i);
+      }
       if (!this.isAgedBrieProduct(i) && !this.isBackstageProduct(i)) {
         if (this.hasQuality(i)) {
           if (!this.isSulfurasProduct(i)) {
@@ -34,9 +37,6 @@ class Shop {
             }
           }
         }
-      }
-      if (!this.isSulfurasProduct(i)) {
-        this.decreaseSellin(i);
       }
       if (this.items[i].sellIn < 0) {
         if (!this.isAgedBrieProduct(i)) {
