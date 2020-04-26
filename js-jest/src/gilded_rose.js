@@ -19,12 +19,16 @@ class Shop {
       } else if (this.isAgedBrieProduct(i)) {
         this.agedProductBehavior(i);
       } else if (this.isConjuredProduct(i)) {
-        this.standardSellinDecrease(i)
-        this.qualityDecrease(i,2)
+        this.conjuredProductBehavior(i);
       }
     }
 
     return this.items;
+  }
+
+  conjuredProductBehavior(i) {
+    this.standardSellinDecrease(i);
+    this.qualityDecrease(i, 2);
   }
 
   isConjuredProduct(i) {
