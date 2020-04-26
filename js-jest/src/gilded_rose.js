@@ -36,9 +36,10 @@ class Shop {
 
   agedProductBehavior(i) {
     this.standardSellinDecrease(i);
-    this.qualityIncrease(i,1);
-    if (this.isSellByDate(i)) {
+    if (!this.isSellByDate(i)) {
       this.qualityIncrease(i,1);
+    } else {
+      this.qualityIncrease(i,2);
     }
   }
 
