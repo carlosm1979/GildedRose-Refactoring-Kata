@@ -13,7 +13,7 @@ class Shop {
   updateQuality() {
     for (let i = 0; i < this.items.length; i++) {
       if (!this.isSulfurasProduct(i)) {
-        this.decreaseSellin(i);
+        this.standardSellinDecrease(i);
       }
       if (this.productHasStandardBehavior(i) && this.hasQuality(i)) {
         this.standardQualityDecrease(i);
@@ -24,7 +24,7 @@ class Shop {
           this.standardQualityIncrease(i)
         }
       }
-      if (this.items[i].sellIn < 0) {
+      if (this.isSellByDate(i)) {
         if (this.productHasStandardBehavior(i) && this.hasQuality(i)) {
           this.standardQualityDecrease(i);
         }
@@ -38,6 +38,10 @@ class Shop {
     }
 
     return this.items;
+  }
+
+  isSellByDate(i) {
+    return this.items[i].sellIn < 0;
   }
 
   backstageQualityIncrease(i) {
@@ -62,7 +66,7 @@ class Shop {
     return this.items[i].quality > 0;
   }
 
-  decreaseSellin(i) {
+  standardSellinDecrease(i) {
     this.items[i].sellIn = this.items[i].sellIn - 1;
   }
 
