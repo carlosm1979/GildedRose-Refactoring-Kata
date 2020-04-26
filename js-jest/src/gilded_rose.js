@@ -15,12 +15,8 @@ class Shop {
       if (!this.isSulfurasProduct(i)) {
         this.decreaseSellin(i);
       }
-      if (!this.isAgedBrieProduct(i) && !this.isBackstageProduct(i)) {
-        if (this.hasQuality(i)) {
-          if (!this.isSulfurasProduct(i)) {
-            this.decreaseQuality(i);
-          }
-        }
+      if (this.productHasStandardBehavior(i) && this.hasQuality(i)) {
+        this.decreaseQuality(i);
       } else {
         if (this.isQualityUnderLimit(i)) {
           this.increaseQuality(i)
@@ -58,6 +54,10 @@ class Shop {
     }
 
     return this.items;
+  }
+
+  productHasStandardBehavior(i) {
+    return !this.isSulfurasProduct(i) && !this.isAgedBrieProduct(i) && !this.isBackstageProduct(i);
   }
 
   isQualityUnderLimit(i) {
