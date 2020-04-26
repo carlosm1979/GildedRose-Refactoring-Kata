@@ -12,30 +12,42 @@ class Shop {
   }
   updateQuality() {
     for (let i = 0; i < this.items.length; i++) {
-      if (!this.isSulfurasProduct(i)) {
-        this.standardSellinDecrease(i);
-      }
-      if (this.productHasStandardBehavior(i) && this.hasQuality(i)) {
-        this.standardQualityDecrease(i);
-      }
-      if (this.productHasStandardBehavior(i) && this.hasQuality(i)) {
-        if (this.isSellByDate(i)) {
-          this.standardQualityDecrease(i);
-        }
+      if (this.productHasStandardBehavior(i)) {
+        this.standardBehavior(i);
       }
       if (this.isBackstageProduct(i)) {
-        this.backstageQualityIncrease(i);
-        this.backstageQualityDecrease(i);
+        this.backstageProductBehavior(i);
       }
       if (this.isAgedBrieProduct(i)) {
-        this.standardQualityIncrease(i)
-        if (this.isSellByDate(i)) {
-          this.standardQualityIncrease(i);
-        }
+        this.agedProductBehavior(i);
       }
     }
 
     return this.items;
+  }
+
+  standardBehavior(i) {
+    this.standardSellinDecrease(i);
+    if (this.hasQuality(i)) {
+      this.standardQualityDecrease(i);
+      if (this.isSellByDate(i)) {
+        this.standardQualityDecrease(i);
+      }
+    }
+  }
+
+  agedProductBehavior(i) {
+    this.standardSellinDecrease(i);
+    this.standardQualityIncrease(i);
+    if (this.isSellByDate(i)) {
+      this.standardQualityIncrease(i);
+    }
+  }
+
+  backstageProductBehavior(i) {
+    this.standardSellinDecrease(i);
+    this.backstageQualityIncrease(i);
+    this.backstageQualityDecrease(i);
   }
 
   backstageQualityDecrease(i) {
