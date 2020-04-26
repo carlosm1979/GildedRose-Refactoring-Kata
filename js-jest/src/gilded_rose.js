@@ -27,9 +27,9 @@ class Shop {
   standardBehavior(i) {
     this.standardSellinDecrease(i);
     if (this.hasQuality(i)) {
-      this.qualityDecrease(i);
+      this.qualityDecrease(i,1);
       if (this.isSellByDate(i)) {
-        this.qualityDecrease(i);
+        this.qualityDecrease(i,1);
       }
     }
   }
@@ -106,8 +106,8 @@ class Shop {
     }
   }
 
-  qualityDecrease(i) {
-    this.items[i].quality = this.items[i].quality - 1;
+  qualityDecrease(i, quantity) {
+    this.items[i].quality = this.items[i].quality - quantity;
   }
 }
 
