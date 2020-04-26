@@ -17,27 +17,31 @@ class Shop {
       }
       if (this.productHasStandardBehavior(i) && this.hasQuality(i)) {
         this.standardQualityDecrease(i);
-      } else {
-        if (this.isBackstageProduct(i)) {
-          this.backstageQualityIncrease(i);
-        } else {
-          this.standardQualityIncrease(i)
-        }
       }
-      if (this.isSellByDate(i)) {
-        if (this.productHasStandardBehavior(i) && this.hasQuality(i)) {
+      if (this.productHasStandardBehavior(i) && this.hasQuality(i)) {
+        if (this.isSellByDate(i)) {
           this.standardQualityDecrease(i);
         }
-        if (this.isBackstageProduct(i)) {
-          this.dropQuality(i);
-        }
-        if (this.isAgedBrieProduct(i)){
+      }
+      if (this.isBackstageProduct(i)) {
+        this.backstageQualityIncrease(i);
+        this.backstageQualityDecrease(i);
+      }
+      if (this.isAgedBrieProduct(i)) {
+        this.standardQualityIncrease(i)
+        if (this.isSellByDate(i)) {
           this.standardQualityIncrease(i);
         }
       }
     }
 
     return this.items;
+  }
+
+  backstageQualityDecrease(i) {
+    if (this.isSellByDate(i)) {
+      this.dropQuality(i);
+    }
   }
 
   isSellByDate(i) {
