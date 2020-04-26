@@ -33,4 +33,30 @@ describe("Gilded Rose", function() {
       });
     }
   );
+
+  it('The Quality of an item is never negative', () => {
+    const gildedRose = new Shop([new Item("foo", 0, 0)]);
+
+    const items = gildedRose.updateQuality();
+
+    expect(items[0].sellIn).toBe(-1)
+    expect(items[0].quality).toBe(0)
+  });
+
+  it('“Aged Brie” actually increases in Quality the older it gets', () => {
+    const gildedRose = new Shop([new Item("Aged Brie", 1, 1)]);
+
+    const items = gildedRose.updateQuality();
+
+    expect(items[0].sellIn).toBe(0)
+    expect(items[0].quality).toBe(2)
+  });
+  it('“Aged Brie” actually increases double after sell by date passed', () => {
+    const gildedRose = new Shop([new Item("Aged Brie", 0, 1)]);
+
+    const items = gildedRose.updateQuality();
+
+    expect(items[0].sellIn).toBe(-1)
+    expect(items[0].quality).toBe(3)
+  });
 });
